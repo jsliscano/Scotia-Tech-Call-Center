@@ -1,6 +1,7 @@
 package com.scotiatech.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,16 +21,19 @@ public class ProgramaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // ID del programa
+    private Long id;
 
+    @NotNull(message = "Se requiere el nombre")
     @Column(nullable = false, unique = true)
-    private String nombre; // Nombre del programa
+    private String nombre;
 
-    // Relación muchos a uno con FacultadEntity
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "facultad_id", nullable = false) // Columna en la tabla programa
-    private FacultadEntity facultad; // Facultad a la que pertenece el programa
+    @JoinColumn(name = "facultad_id", nullable = false)
+    private FacultadEntity facultad;
 
-    @OneToMany(mappedBy = "programa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<UsuarioEntity> usuarios = new HashSet<>();
+
 }
+
+
+
+

@@ -15,7 +15,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "usuario")
 public class UsuarioEntity {
@@ -48,19 +47,19 @@ public class UsuarioEntity {
     @Column(nullable = false)
     private Boolean active = true;
 
-    @Column(name = "id_director_programa")
-    private Long idDirectorPrograma; // Considera cambiar esto a una relación con otra entidad si es necesario
-
-    // Relación con ProgramaEntity
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "programa_id", nullable = false) // Nombre de la columna en la tabla usuario
+    @JoinColumn(name = "faculty_id") // Nombre de la columna de la clave foránea
+    private FacultadEntity faculty;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "programa_id", nullable = false) // Nombre de la columna de la clave foránea
     private ProgramaEntity programa;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "usuario_rol",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id") // Asegúrate de que este nombre sea correcto
+            name = "usuario_rol",  // Tabla intermedia
+            joinColumns = @JoinColumn(name = "usuario_id"),  // Clave foránea de usuario
+            inverseJoinColumns = @JoinColumn(name = "rol_id")  // Clave foránea de rol
     )
     private Set<RolEntity> roles = new HashSet<>();
 }

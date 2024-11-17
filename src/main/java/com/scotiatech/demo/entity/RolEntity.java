@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,16 +18,11 @@ import java.util.Set;
 public class RolEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long rol_id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles") // Relación inversa con UsuarioEntity
     private Set<UsuarioEntity> users = new HashSet<>();
-
 }
-
-
-
-
