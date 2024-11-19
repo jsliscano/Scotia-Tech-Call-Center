@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-
 @Repository
-public interface AgendaValidaRepository extends JpaRepository<AgendaEntity,Long> {
+public interface AgendaValidaRepository extends JpaRepository<AgendaEntity, Long> {
 
         @Query(value = "SELECT av.id AS id, av.file_name AS fileName, f.nombre AS faculty, p.nombre AS program, " +
                 "av.creation_date AS creationDate, av.dean_approval AS deanApproval, av.program_director_approval AS programDirectorApproval " +
@@ -56,5 +56,4 @@ public interface AgendaValidaRepository extends JpaRepository<AgendaEntity,Long>
                 "WHERE av.faculty_id = :deanId AND av.program_director_approval = 1 AND av.dean_approval IS NOT NULL " +
                 "ORDER BY av.creation_date DESC", nativeQuery = true)
         List<IAgendaDto> findAllForHistoricoDecano(@Param("deanId") Long deanId);
-
 }

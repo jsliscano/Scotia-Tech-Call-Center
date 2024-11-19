@@ -21,6 +21,7 @@ public class FacultadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "faculty_id")
     private Long id;
 
     @NotNull(message = "Name is required")

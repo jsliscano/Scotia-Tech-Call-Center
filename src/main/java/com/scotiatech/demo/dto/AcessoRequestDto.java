@@ -1,7 +1,5 @@
 package com.scotiatech.demo.dto;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
